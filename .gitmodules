@@ -1,0 +1,3 @@
+[submodule "application/submodules/tools"]
+	path = application/submodules/tools
+	url = git@github.com:itkr/itkr-django-tools.git
