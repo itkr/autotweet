@@ -7,20 +7,25 @@
     </head>
 
     <body>
-        <h1>
-        	Auto Tweet
-        </h1>
+        <h1> Auto Tweet </h1>
         <nav>
-        	<ul>
-        		<li>login</li>
-        	</ul>
+            <ul>
+                <li>
+                    {% if user.username %}
+                      {{ user.username }}
+                      <a href="{% url 'logout' %}">logout</a>
+                    {% else %}
+                       <a href="{% url 'socialauth_begin' 'twitter' %}"> <img src="{{ STATIC_URL }}img/sign-in-with-twitter-gray.png"> </a>
+                    {% endif %}
+                </li>
+            </ul>
         </nav>
         <section>
-        	<h2>start now</h2>
-        	<form>
-        		<input type="text" name="account">
-        		<input type="submit" value="OK">
-        	</form>
+            <h2>start now</h2>
+            <form>
+                <input type="text" name="account">
+                <input type="submit" value="OK">
+            </form>
         </section>
     </body>
 </html>
