@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Autotweet</title>
+        <link href='http://fonts.googleapis.com/css?family=Nunito:400,700' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Average+Sans' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/base.css" >
     </head>
@@ -10,15 +11,19 @@
         <h1> Auto Tweet </h1>
         <nav>
             <ul>
-                <li>
                     {% if user.username %}
-                      {{ user.username }}
-                      <a href="{% url 'logout' %}">logout</a>
+                      <li>
+                         <a href="http://twitter.com/{{ user.username }}" target="_blank">@{{ user.username }}</a>
+                      </li>
+                      <li>
+                         <a href="{% url 'logout' %}">logout</a>
+                      </li>
                     {% else %}
-                       <a href="{% url 'socialauth_begin' 'twitter' %}"> <img src="{{ STATIC_URL }}img/sign-in-with-twitter-gray.png"> </a>
+                       <li>
+                       	<a href="{% url 'socialauth_begin' 'twitter' %}"> <img src="{{ STATIC_URL }}img/sign-in-with-twitter-gray.png"> </a>
+                       </li>
                     {% endif %}
-                </li>
-            </ul>
+                </li>            </ul>
         </nav>
         <section>
             <h2>start now</h2>
