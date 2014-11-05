@@ -1,20 +1,13 @@
 from django.conf.urls import patterns, include, url
-
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from .apps.auth.views import LogoutView
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'autotweet.views.home', name='home'),
-    # url(r'^autotweet/', include('autotweet.foo.urls')),
+    # Login
+    url(r'^logout$',  LogoutView.as_view(), name='logout'),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
-
-    url(r'', include('social_auth.urls')),
+    # Application
     url(r'^$',  include('application.apps.urls')),
+
+    # Social
+    url(r'', include('social_auth.urls')),
 )
