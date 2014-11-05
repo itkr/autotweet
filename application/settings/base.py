@@ -92,6 +92,19 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
 )
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages"
+)
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'social_auth.context_processors.social_auth_by_name_backends',
+)
+
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -130,6 +143,7 @@ INSTALLED_APPS = (
 # Third party
 INSTALLED_APPS += (
      'south',
+     'social_auth',
 )
 # Custom
 INSTALLED_APPS += (
@@ -164,3 +178,32 @@ LOGGING = {
         },
     }
 }
+
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
+#    'social_auth.backends.facebook.FacebookBackend',
+)
+
+try:
+    from .oauth import (
+        TWITTER_CONSUMER_KEY,
+        TWITTER_CONSUMER_SECRET,
+        FACEBOOK_APP_ID,
+        FACEBOOK_API_SECRET,
+        FACEBOOK_EXTENDED_PERMISSIONS,
+
+        LOGIN_URL,
+        LOGIN_REDIRECT_URL,
+        LOGIN_ERROR_URL,
+    )
+except ImportError:
+    TWITTER_CONSUMER_KEY = 'your consumer key'
+    TWITTER_CONSUMER_SECRET = 'your cosumer secret'
+    FACEBOOK_APP_ID = 'your facebook app id'
+    FACEBOOK_API_SECRET = 'your facebook api secret'
+    FACEBOOK_EXTENDED_PERMISSIONS = ['publish_stream']
+
+    LOGIN_URL = '/login/'
+    LOGIN_REDIRECT_URL = '/dashboard/'
+    LOGIN_ERROR_URL = '/login-error/'
+
