@@ -147,7 +147,7 @@ INSTALLED_APPS += (
 )
 # Custom
 INSTALLED_APPS += (
-    # 'module.campaign',
+    'application.module.twitter_api',
 )
 
 # A sample logging configuration. The only tangible logging

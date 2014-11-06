@@ -27,8 +27,8 @@
         </nav>
         <section>
             <h2>start now</h2>
-            <form>
-                <input type="text" name="account">
+            <form method="POST" action="{% url 'twitter-tweet' %}">
+                <input type="text" name="desctription">
                 <input type="submit" value="OK">
             </form>
         </section>

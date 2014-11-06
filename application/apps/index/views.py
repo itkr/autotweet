@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.views.generic import TemplateView
-from social_auth.models import UserSocialAuth
 
 
 TEMPLATE_DIRECTORY = 'root'
@@ -17,12 +16,8 @@ class IndexView(TemplateView):
         return self.get(request, args, kwargs)
 
     def get_context_data(self, request, **kwargs):
-        print request.user.username
         if request.session.get('social_auth_last_login_backend') == 'twitter':
-            auth = UserSocialAuth.objects.filter(user=request.user).get()
-#            token = auth.tokens['access_token']
             return {
-                'auth': auth,
                 'user': request.user,
             }
         return {}
