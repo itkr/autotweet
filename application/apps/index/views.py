@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.views.generic import TemplateView
+# TODO: dir
+from application.apps.twitter.forms import TweetForm
 
 
 TEMPLATE_DIRECTORY = 'root'
@@ -19,5 +21,6 @@ class IndexView(TemplateView):
         if request.session.get('social_auth_last_login_backend') == 'twitter':
             return {
                 'user': request.user,
+                'form': TweetForm,
             }
         return {}

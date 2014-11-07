@@ -11,27 +11,34 @@
         <h1> Auto Tweet </h1>
         <nav>
             <ul>
-                    {% if user.username %}
-                      <li>
-                         <a href="http://twitter.com/{{ user.username }}" target="_blank">@{{ user.username }}</a>
-                      </li>
-                      <li>
-                         <a href="{% url 'logout' %}">logout</a>
-                      </li>
-                    {% else %}
-                       <li>
-                       	<a href="{% url 'socialauth_begin' 'twitter' %}"> <img src="{{ STATIC_URL }}img/sign-in-with-twitter-gray.png"> </a>
-                       </li>
-                    {% endif %}
-                </li>            </ul>
+                {% if user.username %}
+                <li>
+                    <a href="http://twitter.com/{{ user.username }}" target="_blank">@{{ user.username }}</a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}">logout</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'socialauth_begin' 'twitter' %}"> <img src="{{ STATIC_URL }}img/sign-in-with-twitter-gray.png"> </a>
+                </li>
+                {% endif %}
+                </li>
+            </ul>
         </nav>
         <section>
             <h2>start now</h2>
+            {% if user.username %}
             <form method="POST" action="{% url 'twitter-tweet' %}">
-            	{% csrf_token %}
-                <input type="text" name="desctription">
+                {% csrf_token %}
+                {% for field in form %}
+                {{ field.errors }}
+                <!-- {{ field.label_tag }}: -->
+                {{ field }}
+                {% endfor %}
                 <input type="submit" value="OK">
             </form>
+            {% endif %}
         </section>
     </body>
 </html>
