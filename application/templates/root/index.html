@@ -28,6 +28,7 @@
         <section>
             <h2>start now</h2>
             <form method="POST" action="{% url 'twitter-tweet' %}">
+            	{% csrf_token %}
                 <input type="text" name="desctription">
                 <input type="submit" value="OK">
             </form>
