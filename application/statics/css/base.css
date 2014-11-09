@@ -18,6 +18,10 @@ body {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfffc', endColorstr='#fafffa',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
+section{
+	margin-top: 20px;
+}
+
 h1 {
 	color: #339933;
 }
@@ -26,7 +30,7 @@ a{
 	color: #66cc66;
 }
 
-input[type="text"]{
+textarea, input[type="text"]{
 	border-radius: 5px;
 	height: 20px;
 }

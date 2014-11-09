@@ -148,6 +148,7 @@ INSTALLED_APPS += (
 # Custom
 INSTALLED_APPS += (
     'application.module.twitter_api',
+    'application.module.transaction',
 )
 
 # A sample logging configuration. The only tangible logging

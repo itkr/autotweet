@@ -8,7 +8,7 @@
     </head>
 
     <body>
-        <h1> Auto Tweet </h1>
+        <h1>Auto Tweet Logging.</h1>
         <nav>
             <ul>
                 {% if user.username %}
@@ -27,8 +27,8 @@
             </ul>
         </nav>
         <section>
-            <h2>start now</h2>
             {% if user.username %}
+            <h2>tweet now</h2>
             <form method="POST" action="{% url 'twitter-tweet' %}">
                 {% csrf_token %}
                 {% for field in form %}
@@ -40,5 +40,20 @@
             </form>
             {% endif %}
         </section>
+        <div id="transactions">
+            <section>
+                {% if transactions %}
+                <h2>my transaction</h2>
+                <ul>
+                    {% for transaction in transactions %}
+                    <li>
+                        <form>
+                        	<textarea name="text">{{transaction.text}}</textarea>
+                        </form>
+                        {% endfor %}
+                </ul>
+                {% endif %}
+            </section>
+        </div>
     </body>
 </html>
