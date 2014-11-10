@@ -36,7 +36,7 @@
                 <!-- {{ field.label_tag }}: -->
                 {{ field }}
                 {% endfor %}
-                <input type="submit" value="OK">
+                <input type="submit" value="post">
             </form>
             {% endif %}
         </section>
@@ -47,10 +47,19 @@
                 <ul>
                     {% for transaction in transactions %}
                     <li>
-                        <form>
-                        	<textarea name="text">{{transaction.text}}</textarea>
-                        </form>
+                        <div class="transaction">
+                            <form>
+                                <textarea name="text" rows="3" cols="47">{{transaction.text}}</textarea>
+                                <input type="submit" value="update">
+                            </form>
+                        </div>
                         {% endfor %}
+                    <li>
+                        <div class="transaction">
+                            <form>
+                                <input type="submit" value="more" id="more">
+                            </form>
+                        </div>
                 </ul>
                 {% endif %}
             </section>

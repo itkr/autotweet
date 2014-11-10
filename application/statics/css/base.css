@@ -30,7 +30,33 @@ a{
 	color: #66cc66;
 }
 
-textarea, input[type="text"]{
-	border-radius: 5px;
-	height: 20px;
+.transaction{
+	margin:auto;
+	width: 80%;
+	padding: 5px 20px 5px 20px;
+	/* background-color: #dfffdf; */
+	border-bottom: 1px dotted #66CC66;
+	
+}
+textarea{
+	vertical-align:bottom;
+	border: 1px solid #66CC66;
+}
+input[type="text"]{
+	height: 38px;
+	line-height: 38px;
+	vertical-align:bottom;
+	border: 1px solid #66CC66;
+}
+input[type="submit"]{
+	height: 41px;
+	line-height: 41px;
+	padding: 0 20px 0 20px;
+	border:0;
+	color:#DFFFDF;
+	background-color:#66cc66;
+	font-size: 1em;
+}
+#more{
+	background-color: #cccccc;
 }
