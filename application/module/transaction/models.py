@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 from django.db import models
 from application.submodules.tools.db import UserHasManyModelMixin
 
@@ -14,6 +15,28 @@ class Transaction(UserHasManyModelMixin):
     remaining_count = models.PositiveIntegerField(null=True, default=None)
     start_at = models.DateTimeField(null=True)
     end_at = models.DateTimeField(null=True)
+
+    def is_in_term(self, target_datetime=None):
+
+        """
+        指定したdatetimeが期間内に含まれているか
+        datetimeを指定しなかった場合は現在の日時を使用する
+        """
+
+        if target_datetime is None:
+            target_datetime = datetime.now()
+        # どちらも指定なし
+        if not self.start_at and not self.end_at:
+            return True
+        # startのみ指定
+        if self.start_at and not self.end_at:
+            return self.start_at <= target_datetime
+        # endのみ指定
+        if not self.start_at and self.end_at:
+            return target_datetime <= self.start_at
+        # どちらも指定あり
+        if self.start_at and self.end_at:
+            return self.start_at <= target_datetime <= self.end_at
 
     def update(self, **kwargs):
 
