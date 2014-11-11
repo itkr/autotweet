@@ -12,6 +12,8 @@ class Transaction(UserHasManyModelMixin):
     text = models.TextField(max_length=140, default='')
     enable = models.BooleanField(default=True)
     remaining_count = models.PositiveIntegerField(null=True, default=None)
+    start_at = models.DateTimeField(null=True)
+    end_at = models.DateTimeField(null=True)
 
     def update(self, **kwargs):
 
