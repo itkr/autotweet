@@ -48,7 +48,7 @@ input[type="text"]{
 	vertical-align:bottom;
 	border: 1px solid #66CC66;
 }
-input[type="submit"]{
+input[type="submit"], button{
 	height: 41px;
 	line-height: 41px;
 	padding: 0 20px 0 20px;
@@ -59,4 +59,9 @@ input[type="submit"]{
 }
 #more{
 	background-color: #cccccc;
+}
+img.icon{
+	vertical-align:bottom;
+	width: 41px;
+	height: 41px;
 }
