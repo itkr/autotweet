@@ -4,15 +4,11 @@ from django.db import models
 from application.submodules.tools.db import UserHasManyModelMixin
 
 
-class Transaction(UserHasManyModelMixin):
+class TermMixin(models.Model):
 
     class Meta:
-        app_label = "transaction"
+        abstract = True
 
-    time_id = models.IntegerField(null=True, default=None)
-    text = models.TextField(max_length=140, default='')
-    enable = models.BooleanField(default=True)
-    remaining_count = models.PositiveIntegerField(null=True, default=None)
     start_at = models.DateTimeField(null=True)
     end_at = models.DateTimeField(null=True)
 
@@ -37,6 +33,21 @@ class Transaction(UserHasManyModelMixin):
         # どちらも指定あり
         if self.start_at and self.end_at:
             return self.start_at <= target_datetime <= self.end_at
+
+    @property
+    def enable(self):
+        return self.is_in_term(datetime.now())
+
+
+class Transaction(UserHasManyModelMixin, TermMixin):
+
+    class Meta:
+        app_label = "transaction"
+
+    time_id = models.IntegerField(null=True, default=None)
+    text = models.TextField(max_length=140, default='')
+    enable = models.BooleanField(default=True)
+    remaining_count = models.PositiveIntegerField(null=True, default=None)
 
     def update(self, **kwargs):
 
