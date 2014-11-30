@@ -4,42 +4,7 @@ from django.db import models
 from application.submodules.tools.db import UserHasManyModelMixin
 
 
-class TermMixin(models.Model):
-
-    class Meta:
-        abstract = True
-
-    start_at = models.DateTimeField(null=True)
-    end_at = models.DateTimeField(null=True)
-
-    def is_in_term(self, target_datetime=None):
-
-        """
-        指定したdatetimeが期間内に含まれているか
-        datetimeを指定しなかった場合は現在の日時を使用する
-        """
-
-        if target_datetime is None:
-            target_datetime = datetime.now()
-        # どちらも指定なし
-        if not self.start_at and not self.end_at:
-            return True
-        # startのみ指定
-        if self.start_at and not self.end_at:
-            return self.start_at <= target_datetime
-        # endのみ指定
-        if not self.start_at and self.end_at:
-            return target_datetime <= self.start_at
-        # どちらも指定あり
-        if self.start_at and self.end_at:
-            return self.start_at <= target_datetime <= self.end_at
-
-    @property
-    def enable(self):
-        return self.is_in_term(datetime.now())
-
-
-class Transaction(UserHasManyModelMixin, TermMixin):
+class Transaction(UserHasManyModelMixin):
 
     class Meta:
         app_label = "transaction"
@@ -48,6 +13,9 @@ class Transaction(UserHasManyModelMixin, TermMixin):
     text = models.TextField(max_length=140, default='')
     enable = models.BooleanField(default=True)
     remaining_count = models.PositiveIntegerField(null=True, default=None)
+
+    start_at = models.DateTimeField(null=True)
+    end_at = models.DateTimeField(null=True)
 
     def update(self, **kwargs):
 
@@ -74,3 +42,29 @@ class Transaction(UserHasManyModelMixin, TermMixin):
             self.remaining_count -= 1
             self.save()
         return self
+
+    def is_in_term(self, target_datetime=None):
+
+        """
+        指定したdatetimeが期間内に含まれているか
+        datetimeを指定しなかった場合は現在の日時を使用する
+        """
+
+        if target_datetime is None:
+            target_datetime = datetime.now()
+        # どちらも指定なし
+        if not self.start_at and not self.end_at:
+            return True
+        # startのみ指定
+        if self.start_at and not self.end_at:
+            return self.start_at <= target_datetime
+        # endのみ指定
+        if not self.start_at and self.end_at:
+            return target_datetime <= self.start_at
+        # どちらも指定あり
+        if self.start_at and self.end_at:
+            return self.start_at <= target_datetime <= self.end_at
+
+    @property
+    def enable(self):
+        return self.is_in_term(datetime.now())
