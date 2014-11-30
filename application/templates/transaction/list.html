@@ -26,21 +26,6 @@
                 </li>
             </ul>
         </nav>
-        <section>
-            {% if user.username %}
-            <h2>tweet now</h2>
-            <form method="POST" action="{% url 'twitter-tweet' %}">
-            	<img src="http://twiticon.herokuapp.com/{{ user.username }}" class="icon">
-                {% csrf_token %}
-                {% for field in form %}
-                {{ field.errors }}
-                <!-- {{ field.label_tag }}: -->
-                {{ field }}
-                {% endfor %}
-                <input type="submit" value="post">
-            </form>
-            {% endif %}
-        </section>
         <div id="transactions">
             <section>
                 {% if transactions %}
@@ -49,10 +34,8 @@
                     {% for transaction in transactions %}
                     <li>
                         <div class="transaction">
-                            <form>
-                                <textarea name="text" rows="3" cols="47">{{transaction.text}}</textarea>
-                                <input type="submit" value="detail">
-                            </form>
+                            {{transaction.text}}
+                            <a href="{% url 'transaction-detail' transaction.id %}" class="button">detail</a>
                         </div>
                         {% endfor %}
                     <li>

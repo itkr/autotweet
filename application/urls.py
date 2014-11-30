@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     # Application
     url(r'^$', include('application.apps.index.urls')),
     url(r'^twitter', include('application.apps.twitter.urls')),
+    url(r'^transaction', include('application.apps.transaction.urls')),
 
     # Social
     url(r'', include('social_auth.urls')),
