@@ -3,3 +3,4 @@
 .pydevproject
 .settings/*
 application/settings/oauth.py
+.python-version
